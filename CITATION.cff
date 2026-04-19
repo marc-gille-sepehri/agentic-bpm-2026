@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this benchmark in your research, please cite it as below."
+title: "agentic-bpm-2026: A benchmark for LLM-mediated BPM execution steps"
+abstract: >-
+  A benchmark harness that measures how reliably current reasoning LLMs
+  perform well-defined tasks that an agentic process engine would delegate
+  to a model at runtime (transition-condition evaluation, data mapping, ...)
+  when the relevant business data is kept external to the model and supplied
+  per call as a semantic data pool.
+type: software
+version: "0.1.0"
+date-released: "2026-04-19"
+license: MIT
+authors:
+  - given-names: Marc
+    family-names: Gille-Sepehri
+    affiliation: Lucerne University of Applied Sciences and Arts
+    orcid: "https://orcid.org/0009-0002-7063-5485"
+  - given-names: Michael
+    name-particle: zur
+    family-names: Mühlen
+    affiliation: Stevens Institute of Technology
+keywords:
+  - agentic-ai
+  - large-language-models
+  - business-process-management
+  - benchmark
+  - evaluation
+  - jsonata
+  - data-mapping
+  - mcp

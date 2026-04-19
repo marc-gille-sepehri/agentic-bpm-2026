@@ -436,6 +436,36 @@ Guidance the system prompt gives to the model:
 - **Inline transformations** — `&` for string concat, `?:` ternary for
   code conversions, JSONata aggregates for time-series summaries.
 
+## Authors
+
+- **Marc Gille-Sepehri** (lead author, principal implementer) — Lucerne
+  University of Applied Sciences and Arts, Switzerland.
+  ORCID: [0009-0002-7063-5485](https://orcid.org/0009-0002-7063-5485).
+- **Michael zur Mühlen** — Stevens Institute of Technology, Hoboken, NJ, USA.
+
+## Citing this work
+
+The accompanying manuscript is in preparation and not yet published. Until
+it appears, please cite this repository directly. The `CITATION.cff` file
+at the root provides machine-readable metadata (GitHub will render a
+"Cite this repository" button from it once the repo is public).
+
+Preliminary BibTeX:
+
+```bibtex
+@software{gille_sepehri_agentic_bpm_2026,
+  author       = {Gille-Sepehri, Marc and zur M{\"u}hlen, Michael},
+  title        = {{agentic-bpm-2026: A benchmark for LLM-mediated BPM execution steps}},
+  year         = {2026},
+  version      = {0.1.0},
+  url          = {https://orcid.org/0009-0002-7063-5485}
+}
+```
+
+Once the companion paper is accepted, update the `preferred-citation` block
+in `CITATION.cff` and replace the BibTeX entry above with the paper's
+canonical citation.
+
 ## License
 
 MIT — see `LICENSE`.

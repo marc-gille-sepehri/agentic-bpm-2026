@@ -4,6 +4,14 @@
   "private": true,
   "type": "module",
   "description": "Benchmark for reasoning LLMs on agentic BPM tasks (transition condition evaluation, data mappings, ...)",
+  "author": {
+    "name": "Marc Gille-Sepehri",
+    "url": "https://orcid.org/0009-0002-7063-5485"
+  },
+  "contributors": [
+    { "name": "Michael zur Mühlen" }
+  ],
+  "license": "MIT",
   "scripts": {
     "bench": "tsx src/index.ts",
     "typecheck": "tsc --noEmit"
