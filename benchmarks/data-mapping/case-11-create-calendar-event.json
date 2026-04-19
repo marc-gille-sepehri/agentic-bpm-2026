@@ -1,0 +1,20 @@
+{
+  "id": "create-calendar-event",
+  "description": "Title from email.subject; location from building assembled as one string; description from email.content.",
+  "tool": {
+    "name": "createCalendarEvent",
+    "description": "Create a calendar event.",
+    "parameters": {
+      "title":       { "type": "string", "description": "Event title — use the email subject." },
+      "location":    { "type": "string", "description": "Human-readable single-line location, format: 'Street Number, PostalCode City, Country'." },
+      "description": { "type": "string", "description": "Event description — use the email body verbatim." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "title":       "Monthly HVAC telemetry digest - April 2026",
+      "location":    "Maximilianstrasse 42, 80539 Muenchen, Germany",
+      "description": "The HVAC readings for March show elevated compressor cycling at the Muenchen site. See attached dashboard."
+    }
+  }
+}

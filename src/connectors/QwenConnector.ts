@@ -1,27 +1,30 @@
-import type { CompleteOptions, LLMConnector, LLMResponse } from "./LLMConnector.js";
+import { OpenAIConnector } from "./OpenAIConnector.js";
 
 export interface QwenConnectorOptions {
   model?: string;
   apiKey?: string;
+  /** Override base URL; defaults to the Alibaba Cloud International endpoint. */
+  baseURL?: string;
 }
 
 /**
- * Qwen via Alibaba DashScope. Native endpoint is OpenAI-compatible at
- * https://dashscope-intl.aliyuncs.com/compatible-mode/v1 — you can use the
- * `openai` SDK with baseURL set to that URL and API key = DASHSCOPE_API_KEY.
+ * Qwen via Alibaba DashScope (international compatible-mode endpoint by default).
+ * For mainland China, set DASHSCOPE_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1.
  */
-export class QwenConnector implements LLMConnector {
-  readonly provider = "qwen";
-  readonly name: string;
-
+export class QwenConnector extends OpenAIConnector {
   constructor(options: QwenConnectorOptions = {}) {
-    this.name = options.model ?? "qwen3-max";
-    throw new Error(
-      "QwenConnector not yet implemented. Use DashScope (OpenAI-compatible) endpoint with DASHSCOPE_API_KEY.",
-    );
-  }
-
-  async complete(_prompt: string, _options?: CompleteOptions): Promise<LLMResponse> {
-    throw new Error("QwenConnector.complete not yet implemented");
+    const apiKey = options.apiKey ?? process.env.DASHSCOPE_API_KEY;
+    const baseURL =
+      options.baseURL ??
+      process.env.DASHSCOPE_BASE_URL ??
+      "https://dashscope-intl.aliyuncs.com/compatible-mode/v1";
+    super({
+      apiKey,
+      baseURL,
+      model: options.model ?? "qwen3-max",
+      provider: "qwen",
+      maxTokensField: "max_tokens",
+      apiKeyEnvName: "DASHSCOPE_API_KEY",
+    });
   }
 }

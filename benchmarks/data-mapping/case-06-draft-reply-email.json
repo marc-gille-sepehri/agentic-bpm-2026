@@ -1,0 +1,20 @@
+{
+  "id": "draft-reply-email",
+  "description": "String concat with a constant prefix ('Re: '); swap of from/to for a reply.",
+  "tool": {
+    "name": "draftReplyEmail",
+    "description": "Draft a reply to the current email.",
+    "parameters": {
+      "to":         { "type": "string", "format": "email", "description": "Recipient of the reply — the original sender." },
+      "subject":    { "type": "string", "description": "Reply subject, prefixed with 'Re: '." },
+      "quotedBody": { "type": "string", "description": "The original email body, to be quoted verbatim in the reply." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "to":         "automations@tri.example.com",
+      "subject":    "Re: Monthly HVAC telemetry digest - April 2026",
+      "quotedBody": "The HVAC readings for March show elevated compressor cycling at the Muenchen site. See attached dashboard."
+    }
+  }
+}

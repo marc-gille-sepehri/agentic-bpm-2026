@@ -1,0 +1,20 @@
+{
+  "id": "address-book-entry",
+  "description": "All three fields are mentioned in the conversation — model must decide path vs. constant.",
+  "tool": {
+    "name": "addAddressBookEntry",
+    "description": "Add a new entry to the personal address book.",
+    "parameters": {
+      "email":       { "type": "string", "format": "email", "description": "Contact email." },
+      "city":        { "type": "string", "description": "Contact city." },
+      "countryName": { "type": "string", "description": "Country full name as written in the conversation." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "email":       "marc@the-real-insight.com",
+      "city":        "Muenchen",
+      "countryName": "Germany"
+    }
+  }
+}

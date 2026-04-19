@@ -1,0 +1,98 @@
+{
+  "variables": [
+    {
+      "name": "conversation",
+      "value": [
+        { "role": "user",  "text": "Hi, I'd like to schedule a maintenance inspection for our building at Maximilianstrasse 42, 80539 Muenchen, Germany." },
+        { "role": "agent", "text": "Sure. What's the best email to send the confirmation to?" },
+        { "role": "user",  "text": "Please use marc@the-real-insight.com." },
+        { "role": "agent", "text": "Thanks. Anything specific we should focus on during the inspection?" },
+        { "role": "user",  "text": "The HVAC has been behaving strangely in the last two weeks." }
+      ],
+      "schema": {
+        "type": "array",
+        "description": "Chat conversation history between user and support agent. May contain mentions of user contact details, physical addresses, and topic information stated in natural language.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string", "enum": ["user", "agent"] },
+            "text": { "type": "string" }
+          }
+        }
+      }
+    },
+    {
+      "name": "email",
+      "value": {
+        "from": "automations@tri.example.com",
+        "to": "operations@tri.example.com",
+        "subject": "Monthly HVAC telemetry digest - April 2026",
+        "content": "The HVAC readings for March show elevated compressor cycling at the Muenchen site. See attached dashboard."
+      },
+      "schema": {
+        "type": "object",
+        "description": "A complete inbound email message.",
+        "properties": {
+          "from":    { "type": "string", "format": "email", "description": "Sender email address" },
+          "to":      { "type": "string", "format": "email", "description": "Recipient email address" },
+          "subject": { "type": "string", "description": "Subject line" },
+          "content": { "type": "string", "description": "Body of the email, plain text" }
+        }
+      }
+    },
+    {
+      "name": "building",
+      "value": {
+        "street": "Maximilianstrasse",
+        "streetNumber": "42",
+        "postalCode": "80539",
+        "city": "Muenchen",
+        "countryCode": "DE"
+      },
+      "schema": {
+        "type": "object",
+        "description": "A building record. Addresses are stored with street name and house number in separate fields.",
+        "properties": {
+          "street":        { "type": "string", "description": "Street name, without any number" },
+          "streetNumber":  { "type": "string", "description": "House / street number" },
+          "postalCode":    { "type": "string", "description": "Postal code" },
+          "city":          { "type": "string", "description": "City name" },
+          "countryCode":   { "type": "string", "description": "ISO 3166-1 alpha-2 country code (two characters, e.g. DE, US, FR)" }
+        }
+      }
+    },
+    {
+      "name": "weather",
+      "value": [
+        { "timestamp": "2026-04-13T00:00:00Z", "temperatureC":  8.2, "humidity": 0.72, "conditions": "cloudy" },
+        { "timestamp": "2026-04-14T00:00:00Z", "temperatureC":  9.5, "humidity": 0.65, "conditions": "rain" },
+        { "timestamp": "2026-04-15T00:00:00Z", "temperatureC": 11.0, "humidity": 0.60, "conditions": "clear" },
+        { "timestamp": "2026-04-16T00:00:00Z", "temperatureC": 12.8, "humidity": 0.55, "conditions": "clear" },
+        { "timestamp": "2026-04-17T00:00:00Z", "temperatureC": 14.1, "humidity": 0.50, "conditions": "clear" },
+        { "timestamp": "2026-04-18T00:00:00Z", "temperatureC": 15.3, "humidity": 0.58, "conditions": "partly_cloudy" },
+        { "timestamp": "2026-04-19T00:00:00Z", "temperatureC": 16.0, "humidity": 0.62, "conditions": "partly_cloudy" }
+      ],
+      "schema": {
+        "type": "array",
+        "description": "Daily weather observations for the last seven days, earliest first.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "timestamp":    { "type": "string", "format": "date-time" },
+            "temperatureC": { "type": "number", "description": "Temperature in degrees Celsius" },
+            "humidity":     { "type": "number", "description": "Relative humidity as a fraction in [0, 1]" },
+            "conditions":   { "type": "string", "enum": ["clear", "cloudy", "partly_cloudy", "rain", "snow"] }
+          }
+        }
+      }
+    },
+    {
+      "name": "userAssessment",
+      "value": "The report needs to be improved",
+      "schema": {
+        "type": "string",
+        "description": "Most recent natural-language assessment by the user of the generated report."
+      }
+    }
+  ]
+}

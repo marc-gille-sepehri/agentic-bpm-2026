@@ -1,0 +1,22 @@
+{
+  "id": "send-weather-alert-email",
+  "description": "Combines aggregation, string concat with a constant, email from conversation, latest-reading indexing.",
+  "tool": {
+    "name": "sendWeatherAlertEmail",
+    "description": "Send a weather alert email to the user.",
+    "parameters": {
+      "recipient":           { "type": "string", "format": "email", "description": "User's email address." },
+      "averageTemperatureC": { "type": "number",  "description": "Mean temperature across the series, in Celsius." },
+      "alertSubject":        { "type": "string",  "description": "Subject line, exactly in the format: 'Weather summary for ' followed by the building city (e.g. 'Weather summary for Paris')." },
+      "latestConditions":    { "type": "string",  "description": "Most recent observed conditions." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "recipient":           "marc@the-real-insight.com",
+      "averageTemperatureC": 12.414285714285715,
+      "alertSubject":        "Weather summary for Muenchen",
+      "latestConditions":    "partly_cloudy"
+    }
+  }
+}

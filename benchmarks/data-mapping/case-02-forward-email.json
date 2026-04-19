@@ -1,0 +1,22 @@
+{
+  "id": "forward-email",
+  "description": "Simplest direct field access — every parameter maps 1:1 onto email.*.",
+  "tool": {
+    "name": "forwardEmail",
+    "description": "Forward an email to another recipient.",
+    "parameters": {
+      "originalSender":    { "type": "string", "format": "email" },
+      "originalRecipient": { "type": "string", "format": "email" },
+      "originalSubject":   { "type": "string" },
+      "originalBody":      { "type": "string", "description": "Plain-text body of the email." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "originalSender":    "automations@tri.example.com",
+      "originalRecipient": "operations@tri.example.com",
+      "originalSubject":   "Monthly HVAC telemetry digest - April 2026",
+      "originalBody":      "The HVAC readings for March show elevated compressor cycling at the Muenchen site. See attached dashboard."
+    }
+  }
+}

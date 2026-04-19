@@ -40,8 +40,25 @@ Currently implemented:
   subscription status, inactivity windows, three flavours of confirmation
   intent, three flavours of user-upset detection, and compound conditions.
 
-Planned (not yet implemented): Input and Output Data Mappings, and further
-categories as the research progresses.
+- **Data Mapping** (15 cases) — given a semantic data pool and a tool spec,
+  the model must produce a JSONata expression for every tool parameter such
+  that evaluating the expression against the pool yields the value to pass
+  to the tool. The pool is deliberately shaped differently from the target
+  parameters — e.g. `street` + `streetNumber` must be concatenated into an
+  `addressLine`, `postalCode` must be renamed to `zipCode`, an alpha-2
+  `countryCode` must become alpha-3 or the full country name, aggregates
+  must be computed over a time series, the latest reading must be selected
+  by negative indexing, and data that only appears in a free-text
+  conversation (the user's email address, the country name) must be
+  returned as a JSONata string literal. The shared pool contains five
+  variables (conversation history, an inbound email, a building record,
+  seven days of weather readings, and the user's latest assessment),
+  each carrying its own JSON schema, so the prompt mirrors an MCP-style
+  tool-calling context. Cases exercise direct access, renames, structure
+  transforms, code conversions, aggregates, filters, array indexing, and
+  mixed path/constant assembly.
+
+Planned: further categories as the research progresses.
 
 ## Quick start
 
@@ -70,8 +87,11 @@ npm run bench -- --help
 ```
 
 Known connector labels: `anthropic`, `openai`, `google`, `qwen`, `deepseek`,
-`kimi`. Only `anthropic` ships with a real implementation; the others are
-stubs — see [Adding a new connector](#adding-a-new-connector).
+`kimi` — all implemented. `anthropic` and `google` use native SDKs;
+`openai` / `qwen` / `deepseek` / `kimi` share the OpenAI chat-completions
+wire protocol (the last three are thin subclasses of `OpenAIConnector`
+with different `baseURL` and env var). See
+[Adding a new connector](#adding-a-new-connector) for how to extend.
 
 ## What results look like
 
@@ -132,11 +152,11 @@ src/
   connectors/         LLMConnector interface + one class per provider
     LLMConnector.ts
     AnthropicConnector.ts     (implemented)
-    OpenAIConnector.ts        (stub)
-    GoogleConnector.ts        (stub)
-    QwenConnector.ts          (stub)
-    DeepSeekConnector.ts      (stub)
-    KimiConnector.ts          (stub)
+    OpenAIConnector.ts        (implemented — extensible base for OpenAI-compatible vendors)
+    GoogleConnector.ts        (implemented)
+    QwenConnector.ts          (implemented — OpenAIConnector subclass, DashScope baseURL)
+    DeepSeekConnector.ts      (implemented — OpenAIConnector subclass)
+    KimiConnector.ts          (implemented — OpenAIConnector subclass, Moonshot baseURL)
     index.ts                  registry + CLI filter
   categories/         one module per BPM task type
     Category.ts
@@ -149,6 +169,8 @@ src/
   index.ts            CLI entry
 benchmarks/
   transition-condition/*.json    one case per file
+  data-mapping/_pool.json        shared pool for all data-mapping cases
+  data-mapping/*.json            one case per file (tool spec + expected mappings)
 ```
 
 ## Adding a new connector
@@ -319,7 +341,9 @@ fallback), JSONata-based expression scoring, and a direct-boolean fallback.
 
 ## Test case format
 
-Each case is one JSON file. Transition-condition example:
+Each case is one JSON file. The case shape depends on the category.
+
+### Transition Condition
 
 ```json
 {
@@ -338,6 +362,79 @@ Each case is one JSON file. Transition-condition example:
 The model is asked to reply with either a direct boolean or a JSONata
 expression that evaluates to a boolean. A case passes when the resulting
 boolean equals `expected.value`.
+
+### Data Mapping
+
+Data Mapping cases share a single pool file,
+`benchmarks/data-mapping/_pool.json` (files starting with `_` are skipped
+by the case loader and merged in automatically at load time). Each case
+file only specifies the tool spec and expected mappings:
+
+```json
+{
+  "id": "submit-maintenance-request",
+  "description": "Address concat, postalCode→zipCode rename, alpha-2→alpha-3 country code, email from conversation.",
+  "tool": {
+    "name": "submitMaintenanceRequest",
+    "description": "Submit a maintenance request for a building.",
+    "parameters": {
+      "addressLine":   { "type": "string", "description": "Full street address as 'Street Number'." },
+      "zipCode":       { "type": "string", "description": "Postal or ZIP code." },
+      "countryAlpha3": { "type": "string", "description": "ISO 3166-1 alpha-3 country code (3 characters)." },
+      "contactEmail":  { "type": "string", "format": "email", "description": "User's email for notifications." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "addressLine":   "Maximilianstrasse 42",
+      "zipCode":       "80539",
+      "countryAlpha3": "DEU",
+      "contactEmail":  "marc@the-real-insight.com"
+    }
+  }
+}
+```
+
+Pool shape (abbreviated):
+
+```jsonc
+{
+  "variables": [
+    { "name": "conversation",   "value": [ /* chat turns, mentions email + address */ ], "schema": { /* ... */ } },
+    { "name": "email",          "value": { "from": "...", "to": "...", "subject": "...", "content": "..." }, "schema": { /* ... */ } },
+    { "name": "building",       "value": { "street": "...", "streetNumber": "...", "postalCode": "...", "city": "...", "countryCode": "DE" }, "schema": { /* ... */ } },
+    { "name": "weather",        "value": [ /* daily readings */ ], "schema": { /* ... */ } },
+    { "name": "userAssessment", "value": "The report needs to be improved", "schema": { "type": "string" } }
+  ]
+}
+```
+
+The pool is exposed to the evaluator as a **flat** object keyed by variable
+name: write `building.street`, not `variables[name='building'].value.street`.
+
+The model is asked to return an object:
+
+```json
+{"mappings": {"addressLine": "building.street & ' ' & building.streetNumber", "zipCode": "building.postalCode", "countryAlpha3": "'DEU'", "contactEmail": "'marc@the-real-insight.com'"}}
+```
+
+Each value is a JSONata expression. The scorer evaluates it against the
+flattened pool and compares with `expected.mappings` (1e-3 tolerance for
+numbers, strict equality for strings and objects). A case passes when
+every parameter matches; the `score` field records the fraction correct
+when it doesn't.
+
+Guidance the system prompt gives to the model:
+
+- **Paths** when the data is structured in the pool — `email.subject`,
+  `$average(weather.temperatureC)`, `weather[-1].conditions`,
+  `$count(weather[conditions = 'rain'])`.
+- **String / number literals** (valid JSONata — single-quoted, e.g. `'DEU'`,
+  `'Germany'`, `42`) when the value is only mentioned in free-form text
+  such as the conversation. Bare identifiers are treated as paths and
+  will silently evaluate to nothing.
+- **Inline transformations** — `&` for string concat, `?:` ternary for
+  code conversions, JSONata aggregates for time-series summaries.
 
 ## License
 

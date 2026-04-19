@@ -1,0 +1,20 @@
+{
+  "id": "update-crm-contact",
+  "description": "Full postal address as one string; email from conversation; user assessment as note.",
+  "tool": {
+    "name": "updateCrmContact",
+    "description": "Update a CRM contact record.",
+    "parameters": {
+      "email":       { "type": "string", "format": "email" },
+      "fullAddress": { "type": "string", "description": "Full postal address as one string, format: 'Street Number, PostalCode City, Country'." },
+      "note":        { "type": "string", "description": "Free-text note — use the most recent user assessment verbatim." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "email":       "marc@the-real-insight.com",
+      "fullAddress": "Maximilianstrasse 42, 80539 Muenchen, Germany",
+      "note":        "The report needs to be improved"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "publish-weather-widget",
+  "description": "Latest reading in the series — exercises negative array indexing (weather[-1]).",
+  "tool": {
+    "name": "publishWeatherWidget",
+    "description": "Publish the most recent weather reading to a widget.",
+    "parameters": {
+      "latestTimestamp":    { "type": "string", "format": "date-time", "description": "Timestamp of the most recent observation." },
+      "latestTemperatureC": { "type": "number", "description": "Temperature of the most recent observation, in Celsius." },
+      "latestConditions":   { "type": "string", "description": "Weather conditions at the most recent observation." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "latestTimestamp":    "2026-04-19T00:00:00Z",
+      "latestTemperatureC": 16.0,
+      "latestConditions":   "partly_cloudy"
+    }
+  }
+}

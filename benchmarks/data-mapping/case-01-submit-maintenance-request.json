@@ -1,0 +1,24 @@
+{
+  "id": "submit-maintenance-request",
+  "description": "Address concat, postalCode->zipCode rename, alpha-2->alpha-3 country code, email from conversation.",
+  "tool": {
+    "name": "submitMaintenanceRequest",
+    "description": "Submit a maintenance request for a building.",
+    "parameters": {
+      "addressLine":    { "type": "string", "description": "Full street address as a single line in 'Street Number' format." },
+      "zipCode":        { "type": "string", "description": "Postal or ZIP code." },
+      "city":           { "type": "string", "description": "City." },
+      "countryAlpha3":  { "type": "string", "description": "ISO 3166-1 alpha-3 country code (three characters, e.g. DEU, USA, FRA)." },
+      "contactEmail":   { "type": "string", "format": "email", "description": "User's email address for notifications." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "addressLine":   "Maximilianstrasse 42",
+      "zipCode":       "80539",
+      "city":          "Muenchen",
+      "countryAlpha3": "DEU",
+      "contactEmail":  "marc@the-real-insight.com"
+    }
+  }
+}

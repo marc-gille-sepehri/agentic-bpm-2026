@@ -1,0 +1,20 @@
+{
+  "id": "create-notification",
+  "description": "Cross-variable assembly: recipient from conversation, title from email subject, body from userAssessment.",
+  "tool": {
+    "name": "createNotification",
+    "description": "Create a user-facing notification (banner + body).",
+    "parameters": {
+      "recipientEmail": { "type": "string", "format": "email", "description": "User's email address." },
+      "title":          { "type": "string", "description": "Notification title — use the subject of the most recent email." },
+      "body":           { "type": "string", "description": "Main text — use the user's most recent natural-language assessment." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "recipientEmail": "marc@the-real-insight.com",
+      "title":          "Monthly HVAC telemetry digest - April 2026",
+      "body":           "The report needs to be improved"
+    }
+  }
+}

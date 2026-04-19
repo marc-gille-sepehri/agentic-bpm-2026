@@ -1,0 +1,22 @@
+{
+  "id": "report-weather-conditions",
+  "description": "Filter + count: how many days had each condition.",
+  "tool": {
+    "name": "reportWeatherConditions",
+    "description": "Report how many days in the series had each weather condition.",
+    "parameters": {
+      "clearDayCount":        { "type": "integer", "description": "Number of days with conditions == 'clear'." },
+      "rainyDayCount":        { "type": "integer", "description": "Number of days with conditions == 'rain'." },
+      "partlyCloudyDayCount": { "type": "integer", "description": "Number of days with conditions == 'partly_cloudy'." },
+      "totalDays":            { "type": "integer", "description": "Total number of days in the series." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "clearDayCount":        3,
+      "rainyDayCount":        1,
+      "partlyCloudyDayCount": 2,
+      "totalDays":            7
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import type { CompleteOptions, LLMConnector, LLMResponse } from "./LLMConnector.js";
+import { OpenAIConnector } from "./OpenAIConnector.js";
 
 export interface DeepSeekConnectorOptions {
   model?: string;
@@ -6,21 +6,19 @@ export interface DeepSeekConnectorOptions {
 }
 
 /**
- * DeepSeek API (https://api.deepseek.com) is OpenAI-compatible. Drop in the
- * `openai` SDK with baseURL = "https://api.deepseek.com" and apiKey = DEEPSEEK_API_KEY.
+ * DeepSeek (https://api.deepseek.com) speaks OpenAI's chat.completions wire
+ * protocol, so we reuse OpenAIConnector with a different baseURL and API key.
  */
-export class DeepSeekConnector implements LLMConnector {
-  readonly provider = "deepseek";
-  readonly name: string;
-
+export class DeepSeekConnector extends OpenAIConnector {
   constructor(options: DeepSeekConnectorOptions = {}) {
-    this.name = options.model ?? "deepseek-reasoner";
-    throw new Error(
-      "DeepSeekConnector not yet implemented. Use DeepSeek's OpenAI-compatible endpoint at https://api.deepseek.com.",
-    );
-  }
-
-  async complete(_prompt: string, _options?: CompleteOptions): Promise<LLMResponse> {
-    throw new Error("DeepSeekConnector.complete not yet implemented");
+    const apiKey = options.apiKey ?? process.env.DEEPSEEK_API_KEY;
+    super({
+      apiKey,
+      baseURL: "https://api.deepseek.com",
+      model: options.model ?? "deepseek-reasoner",
+      provider: "deepseek",
+      maxTokensField: "max_tokens",
+      apiKeyEnvName: "DEEPSEEK_API_KEY",
+    });
   }
 }

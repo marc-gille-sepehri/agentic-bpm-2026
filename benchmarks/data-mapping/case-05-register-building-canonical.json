@@ -1,0 +1,24 @@
+{
+  "id": "register-building-canonical",
+  "description": "Country code alpha-2 -> full English country name. Field renames: street->streetName, streetNumber->houseNumber, city->locality.",
+  "tool": {
+    "name": "registerBuildingCanonical",
+    "description": "Register a building in a canonical address directory.",
+    "parameters": {
+      "streetName":  { "type": "string", "description": "Street name (without any number)." },
+      "houseNumber": { "type": "string", "description": "House or street number." },
+      "postalCode":  { "type": "string" },
+      "locality":    { "type": "string", "description": "Town, city, or locality name." },
+      "country":     { "type": "string", "description": "Full English country name (e.g. 'Germany', 'United States', 'France')." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "streetName":  "Maximilianstrasse",
+      "houseNumber": "42",
+      "postalCode":  "80539",
+      "locality":    "Muenchen",
+      "country":     "Germany"
+    }
+  }
+}

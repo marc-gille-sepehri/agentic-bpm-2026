@@ -1,0 +1,22 @@
+{
+  "id": "log-weather-summary",
+  "description": "Aggregations over the time series: $average, $max, $min, $count.",
+  "tool": {
+    "name": "logWeatherSummary",
+    "description": "Log an aggregated summary of a weather time series.",
+    "parameters": {
+      "averageTemperatureC": { "type": "number", "description": "Mean temperature in degrees Celsius across the series." },
+      "maxTemperatureC":     { "type": "number", "description": "Highest temperature in degrees Celsius." },
+      "minTemperatureC":     { "type": "number", "description": "Lowest temperature in degrees Celsius." },
+      "sampleCount":         { "type": "integer", "description": "Number of observations in the series." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "averageTemperatureC": 12.414285714285715,
+      "maxTemperatureC": 16.0,
+      "minTemperatureC": 8.2,
+      "sampleCount": 7
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "submit-feedback-ticket",
+  "description": "userAssessment becomes ticket summary; user email pulled from conversation; building city as location.",
+  "tool": {
+    "name": "submitFeedbackTicket",
+    "description": "Submit a feedback ticket based on the user's latest assessment.",
+    "parameters": {
+      "summary":      { "type": "string", "description": "Short summary — use the user's own assessment verbatim." },
+      "contactEmail": { "type": "string", "format": "email", "description": "User's email address." },
+      "locationCity": { "type": "string", "description": "City where the reporting user is based." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "summary":      "The report needs to be improved",
+      "contactEmail": "marc@the-real-insight.com",
+      "locationCity": "Muenchen"
+    }
+  }
+}

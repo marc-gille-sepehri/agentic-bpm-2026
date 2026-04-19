@@ -1,0 +1,22 @@
+{
+  "id": "file-hvac-incident",
+  "description": "Mixed constants-from-conversation + userAssessment + building.city.",
+  "tool": {
+    "name": "fileHvacIncident",
+    "description": "File an HVAC incident ticket.",
+    "parameters": {
+      "locationCity":     { "type": "string" },
+      "reporterEmail":    { "type": "string", "format": "email" },
+      "issueDescription": { "type": "string", "description": "User-reported HVAC issue, quoted verbatim from the user's most recent message in the conversation." },
+      "assessmentNote":   { "type": "string", "description": "Internal assessment note — use the most recent user assessment verbatim." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "locationCity":     "Muenchen",
+      "reporterEmail":    "marc@the-real-insight.com",
+      "issueDescription": "The HVAC has been behaving strangely in the last two weeks.",
+      "assessmentNote":   "The report needs to be improved"
+    }
+  }
+}
