@@ -1,0 +1,15 @@
+{
+  "id": "user-upset-happy",
+  "description": "Pleasant conversation, no upset",
+  "dataPool": {
+    "conversation": [
+      { "role": "user",  "text": "Hi! Could you help me check my subscription?" },
+      { "role": "agent", "text": "Of course, happy to help." },
+      { "role": "user",  "text": "Thanks! You folks are always so quick." },
+      { "role": "agent", "text": "You're welcome. It renews on May 3rd." },
+      { "role": "user",  "text": "Perfect, thanks a lot." }
+    ]
+  },
+  "condition": "The user is upset.",
+  "expected": { "value": false }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "avg-temp-gt-20-false",
+  "description": "Average outside temperature greater than 20 degC (cool week, avg ~16.3)",
+  "dataPool": {
+    "weather": {
+      "unit": "celsius",
+      "temperatures": [14.0, 16.5, 17.2, 15.8, 18.0, 16.9, 15.5]
+    }
+  },
+  "condition": "The average outside temperature is greater than 20 degrees Celsius.",
+  "expected": { "value": false }
+}

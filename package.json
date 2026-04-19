@@ -1,0 +1,21 @@
+{
+  "name": "agentic-bpm-2026",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Benchmark for reasoning LLMs on agentic BPM tasks (transition condition evaluation, data mappings, ...)",
+  "scripts": {
+    "bench": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
+    "dotenv": "^17.4.2",
+    "jsonata": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  }
+}

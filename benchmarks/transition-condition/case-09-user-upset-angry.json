@@ -1,0 +1,15 @@
+{
+  "id": "user-upset-angry",
+  "description": "User is clearly upset after repeated issues",
+  "dataPool": {
+    "conversation": [
+      { "role": "user",  "text": "I've been waiting 45 minutes." },
+      { "role": "agent", "text": "Apologies for the delay. We're still looking into it." },
+      { "role": "user",  "text": "This is the third time this week. I'm really frustrated." },
+      { "role": "agent", "text": "I understand. Can you give me one more minute?" },
+      { "role": "user",  "text": "No, this is unacceptable. I want to speak to a supervisor now." }
+    ]
+  },
+  "condition": "The user is upset.",
+  "expected": { "value": true }
+}

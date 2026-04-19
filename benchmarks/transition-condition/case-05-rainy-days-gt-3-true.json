@@ -1,0 +1,17 @@
+{
+  "id": "rainy-days-gt-3-true",
+  "description": "More than 3 rainy days in the forecast (5 rainy days)",
+  "dataPool": {
+    "forecast": [
+      { "day": "Mon", "rain": true },
+      { "day": "Tue", "rain": false },
+      { "day": "Wed", "rain": true },
+      { "day": "Thu", "rain": true },
+      { "day": "Fri", "rain": true },
+      { "day": "Sat", "rain": false },
+      { "day": "Sun", "rain": true }
+    ]
+  },
+  "condition": "There are more than 3 rainy days in the forecast window.",
+  "expected": { "value": true }
+}

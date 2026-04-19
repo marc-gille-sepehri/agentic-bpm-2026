@@ -1,0 +1,12 @@
+{
+  "id": "combined-temp-and-user",
+  "description": "Avg temperature > 20 degC AND user confirms",
+  "dataPool": {
+    "weather": {
+      "temperatures": [21.0, 22.5, 23.1]
+    },
+    "lastUserInput": "Yes, let's proceed with activating the cooling schedule."
+  },
+  "condition": "The average outside temperature is greater than 20 degC AND the user confirms.",
+  "expected": { "value": true }
+}

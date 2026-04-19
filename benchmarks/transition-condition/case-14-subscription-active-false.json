@@ -1,0 +1,16 @@
+{
+  "id": "subscription-active-false",
+  "description": "Customer subscription status is 'expired'",
+  "dataPool": {
+    "customer": {
+      "id": "cust-823",
+      "subscription": {
+        "plan": "Pro",
+        "status": "expired",
+        "expiredAt": "2026-01-15"
+      }
+    }
+  },
+  "condition": "The customer has an active subscription.",
+  "expected": { "value": false }
+}

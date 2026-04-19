@@ -1,0 +1,13 @@
+{
+  "id": "inactive-gt-7-days-true",
+  "description": "User last active 9 days ago (nowMs = 2026-04-19, lastActiveAtMs = 2026-04-10)",
+  "dataPool": {
+    "user": {
+      "id": "u-42",
+      "lastActiveAtMs": 1775779200000
+    },
+    "nowMs": 1776556800000
+  },
+  "condition": "The user has been inactive for more than 7 days.",
+  "expected": { "value": true }
+}

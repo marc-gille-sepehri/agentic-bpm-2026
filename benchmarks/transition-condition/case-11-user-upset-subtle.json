@@ -1,0 +1,15 @@
+{
+  "id": "user-upset-subtle",
+  "description": "Polite but clearly dissatisfied — passive-aggressive frustration",
+  "dataPool": {
+    "conversation": [
+      { "role": "user",  "text": "Hi, I was just wondering if my refund has been processed." },
+      { "role": "agent", "text": "Not yet — it's still pending review." },
+      { "role": "user",  "text": "Okay. I was told on Monday it would be done within 24 hours." },
+      { "role": "agent", "text": "Sorry about that, I can escalate." },
+      { "role": "user",  "text": "That would be helpful. I've been given that same answer four times already, and I'd really appreciate if someone actually followed through this time." }
+    ]
+  },
+  "condition": "The user is upset.",
+  "expected": { "value": true }
+}

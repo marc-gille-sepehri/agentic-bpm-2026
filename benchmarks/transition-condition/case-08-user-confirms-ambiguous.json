@@ -1,0 +1,9 @@
+{
+  "id": "user-confirms-ambiguous",
+  "description": "User is hesitant, has not actually confirmed",
+  "dataPool": {
+    "lastUserInput": "Hmm, I'm not sure yet. Let me think about it overnight."
+  },
+  "condition": "The user confirms.",
+  "expected": { "value": false }
+}

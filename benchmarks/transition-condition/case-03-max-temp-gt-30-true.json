@@ -1,0 +1,16 @@
+{
+  "id": "max-temp-gt-30-true",
+  "description": "At least one hourly reading exceeds 30 degC",
+  "dataPool": {
+    "weather": {
+      "readings": [
+        { "hour": 8,  "temp": 24.0 },
+        { "hour": 12, "temp": 29.5 },
+        { "hour": 14, "temp": 31.8 },
+        { "hour": 18, "temp": 28.2 }
+      ]
+    }
+  },
+  "condition": "The maximum recorded temperature today exceeded 30 degC.",
+  "expected": { "value": true }
+}

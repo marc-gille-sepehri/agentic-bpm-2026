@@ -1,0 +1,9 @@
+{
+  "id": "user-confirms-no",
+  "description": "User clearly declines",
+  "dataPool": {
+    "lastUserInput": "No, I've changed my mind — don't place the order."
+  },
+  "condition": "The user confirms.",
+  "expected": { "value": false }
+}

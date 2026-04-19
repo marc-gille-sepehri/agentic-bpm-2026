@@ -1,0 +1,9 @@
+{
+  "id": "user-confirms-yes",
+  "description": "User clearly confirms",
+  "dataPool": {
+    "lastUserInput": "Yes, please go ahead and place the order."
+  },
+  "condition": "The user confirms.",
+  "expected": { "value": true }
+}

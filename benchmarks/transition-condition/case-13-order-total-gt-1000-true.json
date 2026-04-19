@@ -1,0 +1,16 @@
+{
+  "id": "order-total-gt-1000-true",
+  "description": "Cart total (price * quantity, summed) exceeds 1000 (total = 1349.99)",
+  "dataPool": {
+    "cart": {
+      "currency": "USD",
+      "items": [
+        { "sku": "A1", "price": 500,   "quantity": 2 },
+        { "sku": "B2", "price": 100,   "quantity": 3 },
+        { "sku": "C3", "price": 49.99, "quantity": 1 }
+      ]
+    }
+  },
+  "condition": "The total order value (price times quantity, summed across items) exceeds 1000.",
+  "expected": { "value": true }
+}
