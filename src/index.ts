@@ -126,8 +126,14 @@ async function main(): Promise<void> {
 
   console.log("\n=== Summary ===");
   for (const row of summarize(results).overall) {
+    const errTail = row.errorCount ? ` [${row.errorCount} errors]` : "";
+    const lat = row.latency;
+    const toks = `${row.totalInputTokens}in/${row.totalOutputTokens}out`;
     console.log(
-      `  ${row.model}: ${(row.passRate * 100).toFixed(1)}% pass (${row.count} cases, avg ${row.avgLatencyMs.toFixed(0)}ms)`,
+      `  ${row.model}: ${(row.passRate * 100).toFixed(1)}% pass` +
+        ` · ${row.count} cases${errTail}` +
+        ` · latency avg ${lat.avgMs.toFixed(0)}ms p50 ${lat.p50Ms.toFixed(0)}ms max ${lat.maxMs.toFixed(0)}ms` +
+        ` · tokens ${toks}`,
     );
   }
   console.log("\nWrote results/run-*.json and report.html");
