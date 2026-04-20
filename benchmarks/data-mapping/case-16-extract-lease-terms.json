@@ -1,0 +1,24 @@
+{
+  "id": "extract-lease-terms",
+  "description": "Extract key lease terms (tenant, base rent, area, parking, small-repair cap) from the markdown lease agreement — no structured pool path exists for these, so constants must be produced.",
+  "tool": {
+    "name": "recordLeaseTerms",
+    "description": "Record key commercial-lease terms into the property management system.",
+    "parameters": {
+      "tenantName":          { "type": "string",  "description": "Legal name of the tenant entity (company / GmbH), without representatives or addresses." },
+      "baseMonthlyRentEUR":  { "type": "number",  "description": "Base monthly rent in EUR (numeric, no currency symbol or thousands separator)." },
+      "areaSquareMeters":    { "type": "number",  "description": "Total rentable area of the premises in square metres." },
+      "parkingLotCount":     { "type": "integer", "description": "Number of dedicated parking spaces included in the lease." },
+      "smallRepairLimitEUR": { "type": "number",  "description": "Per-case EUR cap the tenant bears for small repairs (Kleinreparaturen)." }
+    }
+  },
+  "expected": {
+    "mappings": {
+      "tenantName":          "Evergreen Analytics GmbH",
+      "baseMonthlyRentEUR":  7480,
+      "areaSquareMeters":    312.5,
+      "parkingLotCount":     2,
+      "smallRepairLimitEUR": 150
+    }
+  }
+}

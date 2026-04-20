@@ -6,6 +6,8 @@ at runtime — transition-condition evaluation, input/output data mappings, and
 related BPM primitives — when the relevant business data is kept **external**
 to the model and passed in per call as a semantic data pool.
 
+We do not cover the LLM's performance for the execution of (service) task in the agentic workflow as these are broader and existing benchmarks apply.
+
 ## Background
 
 This repository accompanies ongoing research on design principles for

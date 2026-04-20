@@ -93,6 +93,15 @@
         "type": "string",
         "description": "Most recent natural-language assessment by the user of the generated report."
       }
+    },
+    {
+      "name": "leaseAgreement",
+      "value": "# Commercial Lease Agreement\n\n## 1. Parties\n\n**Landlord:** Alpine Real Estate Holdings AG, Bahnhofstrasse 12, 6003 Luzern, Switzerland.\n\n**Tenant:** Evergreen Analytics GmbH (HRB 287441, Amtsgericht Muenchen), registered office at Theresienstrasse 108, 80333 Muenchen, Germany. Represented by its sole managing director, Dr. Anna Kaiser.\n\n## 2. Premises\n\nThe Landlord leases to the Tenant the commercial office space on the third floor of the building located at Maximilianstrasse 42, 80539 Muenchen, Germany (the \"Premises\").\n\nThe Premises have a total rentable area of **312.5 m^2**.\n\nTwo (2) dedicated parking spaces in the underground garage of the building are included in the lease.\n\n## 3. Term\n\nThe lease commences on 1 June 2026 and is entered into for a fixed initial term of five (5) years, ending on 31 May 2031.\n\n## 4. Rent\n\nThe base monthly rent for the Premises is **EUR 7,480.00** (net, excluding VAT where applicable), payable in advance no later than the third business day of each calendar month to the account specified in Annex B.\n\nAncillary costs (Nebenkosten), including heating, water, and shared-space utilities, are billed separately on an annual reconciliation basis and are not part of the base rent.\n\n## 5. Small repairs (Kleinreparaturen)\n\nThe Tenant shall bear the cost of minor repairs to items of everyday use within the Premises (such as door handles, light switches, tap fittings, window latches), **limited to EUR 150.00 per individual repair case**.\n\nThe aggregate amount the Tenant is obliged to pay for such small repairs in any calendar year shall not exceed eight per cent (8%) of the annual base rent.\n\n## 6. Security deposit\n\nThe Tenant shall deposit a security of three (3) monthly base rents, payable within 14 days of the lease commencement, into a blocked escrow account held by a German credit institution.\n\n## 7. Signatures\n\nSigned at Muenchen on 15 April 2026.\n\nFor Alpine Real Estate Holdings AG: _________________ (Dr. Lukas Binder, Authorised Signatory)\n\nFor Evergreen Analytics GmbH: _________________ (Dr. Anna Kaiser, Managing Director)\n",
+      "schema": {
+        "type": "string",
+        "format": "markdown",
+        "description": "Full text of the commercial lease agreement for the Premises, in Markdown. Contains tenant identity, leased area, parking allocation, base rent, small-repair cost cap, security deposit, and signatures."
+      }
     }
   ]
 }
