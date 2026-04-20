@@ -18,7 +18,7 @@ export class KimiConnector extends OpenAIConnector {
     super({
       apiKey,
       baseURL,
-      model: options.model ?? "kimi-k2",
+      model: options.model ?? "kimi-latest",
       provider: "kimi",
       maxTokensField: "max_tokens",
       apiKeyEnvName: "MOONSHOT_API_KEY",
